@@ -1,0 +1,339 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: #fff;
+  /* premium dark background: subtle radial glow over near-black */
+  background-color: #08090d;
+  background-image: radial-gradient(120% 120% at 50% 0%, #222 0%, #111 55%, #000 100%);
+  background-attachment: fixed;
+}
+
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+/* inline-SVG logo. White at rest; on hover the paths fill with a rainbow
+   gradient that sweeps sideways, jh3y-style (animated gradientTransform). */
+.logo {
+  position: relative;
+  display: block;
+  width: min(400px, 100%);
+  line-height: 0;
+  /* 3D tilt toward the cursor (--rx/--ry set by JS on pointer move). */
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(800px) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+/* settle back smoothly when the pointer leaves */
+.logo:not(:hover) {
+  transition: transform 0.5s ease;
+}
+
+.logo-svg {
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: visible;
+}
+
+
+/* the inline SVG provides the white wordmark at rest */
+.logo-marks path {
+  fill: #fff;
+}
+
+.logo:focus-visible {
+  outline: none;
+}
+
+/* spinning conic rainbow, clipped to the letter shapes. a full-rainbow
+   conic-gradient fills .logo and is masked to the wordmark via logo-mask.svg
+   (same geometry as the inline letters). on hover it fades in over the white
+   letters and spins like a color wheel. */
+@property --spin {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
+/* outer layer = the crisp letter clip. masking here (not on the blurred
+   conic) keeps the wordmark edges sharp while the colors inside go soft. */
+.logo-conic {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  overflow: hidden;
+  mask: url("./logo-mask.svg") center / contain no-repeat;
+  -webkit-mask: url("./logo-mask.svg") center / contain no-repeat;
+}
+
+/* inner layer = the soft color wheel. blurred so the bands melt into each
+   other (no crisp boundaries), with a radial white wash over the middle so
+   there's no hard conic singularity at the center — like a color picker. */
+.logo-conic::before {
+  content: '';
+  position: absolute;
+  /* overscan so the blur never reveals a transparent edge inside a letter */
+  inset: -30%;
+  background:
+    radial-gradient(
+      circle at center,
+      rgb(255 255 255 / 0.35) 0%,
+      transparent 38%
+    ),
+    conic-gradient(
+      from var(--spin),
+      #ff0040,
+      #ff8a00,
+      #ffe600,
+      #00e676,
+      #00b8ff,
+      #7c4dff,
+      #ff00d4,
+      #ff0040
+    );
+  filter: blur(28px) saturate(1.1);
+}
+
+.logo:hover .logo-conic,
+.logo:focus-visible .logo-conic {
+  opacity: 1;
+  animation: logo-spin 2s linear infinite;
+}
+
+@keyframes logo-spin {
+  to {
+    --spin: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo:hover .logo-conic,
+  .logo:focus-visible .logo-conic {
+    animation: none;
+  }
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 1.75rem);
+}
+
+.tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 9.5rem;
+  padding: 1.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background: rgb(255 255 255 / 0.02);
+  color: #fff;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+/* rainbow gradient ring, revealed on hover. a full-box gradient masked to
+   just the border band (border-box minus padding-box) so the corners stay
+   rounded. fades in via opacity. */
+.link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from 0deg,
+    #ff0040,
+    #ff8a00,
+    #ffe600,
+    #00e676,
+    #00b8ff,
+    #7c4dff,
+    #ff00d4,
+    #ff0040
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.link:hover,
+.link:focus-visible {
+  border-color: transparent;
+  background: rgb(255 255 255 / 0.06);
+  outline: none;
+}
+
+.link:hover::before,
+.link:focus-visible::before {
+  opacity: 1;
+}
+
+.icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #fff;
+}
+
+.link-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.55);
+}
+
+.is-soon {
+  cursor: default;
+}
+
+.is-soon:hover,
+.is-soon:focus-visible {
+  transform: none;
+}
+
+/* "coming soon" isn't active, so no rainbow ring */
+.is-soon::before {
+  display: none;
+}
+
+/* mobile: drop the boxes, lay each tool out as an icon-left row */
+@media (width <= 600px) {
+  .links {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .tool {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .link {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.75rem 0.25rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  /* no boxes on mobile, so no rainbow ring */
+  .link::before {
+    display: none;
+  }
+
+  .link:hover,
+  .link:focus-visible {
+    transform: none;
+    border-color: transparent;
+    background: none;
+  }
+
+  .icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-shrink: 0;
+  }
+
+  .badge {
+    margin-left: auto;
+  }
+}

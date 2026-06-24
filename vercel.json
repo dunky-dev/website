@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "src",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/state-machine",
+      "destination": "https://dunky-state-machine.vercel.app/state-machine"
+    },
+    {
+      "source": "/state-machine/:path*",
+      "destination": "https://dunky-state-machine.vercel.app/state-machine/:path*"
+    }
+  ]
+}

@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Dunky — DX tools that unlock powerful UIs." />
     <title>Dunky — DX tools that unlock powerful UIs</title>
-    <link rel="icon" type="image/svg+xml" href="./logo/logo-symbol.svg" />
+    <!-- @media inside an SVG favicon is ignored by Chrome, so pick the icon
+         per color-scheme on the <link> itself instead. -->
+    <link rel="icon" type="image/svg+xml" href="./logo/logo-symbol.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="./logo/logo-symbol-white.svg" media="(prefers-color-scheme: dark)" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>

@@ -104,9 +104,9 @@ body {
 }
 
 /* spinning conic rainbow, clipped to the letter shapes. a full-rainbow
-   conic-gradient fills .logo and is masked to the wordmark via logo-mask.svg
-   (same geometry as the inline letters). on hover it fades in over the white
-   letters and spins like a color wheel. */
+   conic-gradient fills .logo and is masked to the wordmark via the logo
+   submodule's logo.svg (same geometry as the inline letters). on hover it
+   fades in over the white letters and spins like a color wheel. */
 @property --spin {
   syntax: '<angle>';
   inherits: true;
@@ -122,8 +122,8 @@ body {
   transition: opacity 0.3s ease;
   pointer-events: none;
   overflow: hidden;
-  mask: url("./logo-mask.svg") center / contain no-repeat;
-  -webkit-mask: url("./logo-mask.svg") center / contain no-repeat;
+  mask: url("./logo/logo.svg") center / contain no-repeat;
+  -webkit-mask: url("./logo/logo.svg") center / contain no-repeat;
 }
 
 /* inner layer = the soft color wheel. blurred so the bands melt into each

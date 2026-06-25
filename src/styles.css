@@ -43,9 +43,15 @@ h6 {
 
 body {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
   color: #fff;
   /* premium dark background: subtle radial glow over near-black */
   background-color: #08090d;
@@ -54,8 +60,7 @@ body {
 }
 
 .hero {
-  min-height: 100vh;
-  min-height: 100svh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,12 +98,6 @@ body {
   overflow: visible;
 }
 
-
-/* the inline SVG provides the white wordmark at rest */
-.logo-marks path {
-  fill: #fff;
-}
-
 .logo:focus-visible {
   outline: none;
 }
@@ -122,8 +121,8 @@ body {
   transition: opacity 0.3s ease;
   pointer-events: none;
   overflow: hidden;
-  mask: url("./logo/logo.svg") center / contain no-repeat;
-  -webkit-mask: url("./logo/logo.svg") center / contain no-repeat;
+  mask: url('./logo/logo.svg') center / contain no-repeat;
+  -webkit-mask: url('./logo/logo.svg') center / contain no-repeat;
 }
 
 /* inner layer = the soft color wheel. blurred so the bands melt into each
@@ -135,11 +134,7 @@ body {
   /* overscan so the blur never reveals a transparent edge inside a letter */
   inset: -30%;
   background:
-    radial-gradient(
-      circle at center,
-      rgb(255 255 255 / 0.35) 0%,
-      transparent 38%
-    ),
+    radial-gradient(circle at center, rgb(255 255 255 / 0.35) 0%, transparent 38%),
     conic-gradient(
       from var(--spin),
       #ff0040,
@@ -270,6 +265,65 @@ body {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: rgb(255 255 255 / 0.55);
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  z-index: 10;
+  justify-content: center;
+}
+
+.topbar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.5rem;
+  color: rgb(255 255 255 / 0.55);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition:
+    color 0.18s ease,
+    background 0.18s ease;
+}
+
+.topbar-link:hover,
+.topbar-link:focus-visible {
+  color: #fff;
+  background: rgb(255 255 255 / 0.08);
+  outline: none;
+}
+
+.topbar-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.footer {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgb(255 255 255 / 0.35);
+}
+
+.footer-link {
+  color: rgb(255 255 255 / 0.55);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: #fff;
+  outline: none;
 }
 
 .is-soon {

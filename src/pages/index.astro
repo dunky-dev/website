@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<Base title="Dunky — DX tools that unlock powerful UIs">
+  <main class="hero">
+    <a class="logo" href="/" aria-label="Dunky">
+      <img
+        class="logo-svg"
+        src="/logo/logo-white.svg"
+        alt="Dunky"
+        width="1020"
+        height="306"
+      />
+      <span class="logo-conic" aria-hidden="true"></span>
+    </a>
+
+    <nav class="links" aria-label="Tools">
+      <div class="tool">
+        <a class="link" href="/state-machine">
+          <Icon name="state-machine" class="icon" />
+          <span class="link-label">State Machine</span>
+        </a>
+      </div>
+
+      <div class="tool">
+        <a class="link is-soon" href="#style-engine" aria-disabled="true">
+          <Icon name="sunglass" class="icon" />
+          <span class="link-label">Style Engine</span>
+        </a>
+        <span class="badge">Coming soon</span>
+      </div>
+
+      <div class="tool">
+        <a class="link is-soon" href="#components" aria-disabled="true">
+          <Icon name="lego" class="icon" />
+          <span class="link-label">Components</span>
+        </a>
+        <span class="badge">Coming soon</span>
+      </div>
+    </nav>
+  </main>
+  <script>
+    const logo = document.querySelector(".logo");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (logo && !reduce.matches) {
+      const MAX = 12;
+
+      logo.addEventListener("pointermove", (e) => {
+        const r = logo.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        logo.style.setProperty("--ry", `${px * MAX * 2}deg`);
+        logo.style.setProperty("--rx", `${-py * MAX * 2}deg`);
+      });
+
+      const reset = () => {
+        logo.style.setProperty("--rx", "0deg");
+        logo.style.setProperty("--ry", "0deg");
+      };
+      logo.addEventListener("pointerleave", reset);
+      logo.addEventListener("blur", reset);
+    }
+  </script>
+</Base>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+
+const icons = import.meta.glob("../icons/*.svg", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+const raw = icons[`../icons/${name}.svg`];
+
+// Extract viewBox from the source SVG
+const viewBox = raw.match(/viewBox="([^"]+)"/)?.[1] ?? "0 0 24 24";
+// Strip the outer <svg ...> and </svg> tags, keep inner content
+const inner = raw.replace(/<svg[^>]*>/, "").replace(/<\/svg>/, "");
+---
+
+<svg
+  class={className}
+  viewBox={viewBox}
+  fill="currentColor"
+  aria-hidden="true"
+  set:html={inner}
+/>

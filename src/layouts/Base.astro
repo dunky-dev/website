@@ -1,0 +1,50 @@
+---
+import Icon from '../components/Icon.astro'
+
+interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description = 'Dunky — DX tools that unlock powerful UIs.' } = Astro.props
+const pathname = Astro.url.pathname
+const isHome = pathname === '/'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/logo/logo-symbol.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/logo/logo-symbol-white.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      {!isHome && (
+        <a class="topbar-link topbar-link--back" href="/" aria-label="Home">
+          <Icon name="arrow-left" class="topbar-icon" />
+        </a>
+      )}
+      <a class="topbar-link" href="https://github.com/dunky-dev" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+        <Icon name="github" class="topbar-icon" />
+        <span>GitHub</span>
+      </a>
+      <a class="topbar-link" href="https://x.com/dunky_dev" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+        <Icon name="twitter" class="topbar-icon" />
+        <span>Twitter</span>
+      </a>
+      <a class={`topbar-link${pathname.startsWith('/blog') ? ' topbar-link--active' : ''}`} href="/blog" aria-label="Blog">
+        <Icon name="book" class="topbar-icon" />
+        <span>Blog</span>
+      </a>
+    </header>
+    <slot />
+    <footer class="footer">
+      <p>Made with ❤️ by <a class="footer-link" href="https://x.com/ivanbanov" target="_blank" rel="noopener noreferrer">Ivan Banov</a></p>
+    </footer>
+  </body>
+</html>

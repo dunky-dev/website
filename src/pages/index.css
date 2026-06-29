@@ -66,7 +66,7 @@
 
 /* inner layer = the soft color wheel. blurred so the bands melt into each
    other (no crisp boundaries), with a radial white wash over the middle so
-   there's no hard conic singularity at the center — like a color picker. */
+   there's no hard conic singularity at the center (like a color picker). */
 .logo-conic::before {
   content: '';
   position: absolute;

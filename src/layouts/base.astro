@@ -10,6 +10,7 @@ interface Props {
 const { title, description = 'Dunky: DX tools that unlock powerful UIs.' } = Astro.props
 const pathname = Astro.url.pathname
 const isHome = pathname === '/'
+const isBlogPost = pathname.startsWith('/blog/') && pathname !== '/blog/'
 ---
 
 <!doctype html>
@@ -24,23 +25,27 @@ const isHome = pathname === '/'
   </head>
   <body>
     <header class="topbar">
-      {!isHome && (
-        <a class="topbar-link topbar-link--back" href="/" aria-label="Home">
-          <Icon name="arrow-left" class="topbar-icon" />
-        </a>
-      )}
-      <a class="topbar-link" href="https://github.com/dunky-dev" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-        <Icon name="github" class="topbar-icon" />
-        <span>GitHub</span>
-      </a>
-      <a class="topbar-link" href="https://x.com/ivanbanov" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
-        <Icon name="twitter" class="topbar-icon" />
-        <span>Twitter</span>
-      </a>
-      <a class={`topbar-link${pathname.startsWith('/blog') ? ' topbar-link--active' : ''}`} href="/blog" aria-label="Blog">
-        <Icon name="book" class="topbar-icon" />
-        <span>Blog</span>
-      </a>
+      <div class="topbar-inner">
+        {isBlogPost && (
+          <a class="topbar-logo" href="/" aria-label="Dunky Home">
+            <img src="/logo/logo-white.svg" alt="Dunky" class="topbar-logo-img" />
+          </a>
+        )}
+        <nav class={`topbar-nav${isHome ? ' topbar-nav--centered' : ''}`}>
+          <a class="topbar-link" href="https://github.com/dunky-dev" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+            <Icon name="github" class="topbar-icon" />
+            <span>GitHub</span>
+          </a>
+          <a class="topbar-link" href="https://x.com/ivanbanov" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+            <Icon name="twitter" class="topbar-icon" />
+            <span>Twitter</span>
+          </a>
+          <a class={`topbar-link${pathname.startsWith('/blog') ? ' topbar-link--active' : ''}`} href="/blog" aria-label="Blog">
+            <Icon name="book" class="topbar-icon" />
+            <span>Blog</span>
+          </a>
+        </nav>
+      </div>
     </header>
     <slot />
     <footer class="footer">

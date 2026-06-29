@@ -16,6 +16,11 @@ const { Content } = await render(post)
 <Base title={`${post.data.title} | Dunky`} description={post.data.description}>
   <main class="post-page">
     <article class="post">
+      {post.data.banner && (
+        <div class="post-banner">
+          <img src={post.data.banner} alt="" />
+        </div>
+      )}
       <header class="post-header">
         <time class="post-date" datetime={post.data.date.toISOString()}>
           {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -26,7 +31,7 @@ const { Content } = await render(post)
       <div class="post-content">
         <Content />
       </div>
+      <Comments id={post.id} />
     </article>
-    <Comments id={post.id} />
   </main>
 </Base>

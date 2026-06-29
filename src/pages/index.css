@@ -139,8 +139,7 @@
   background: var(--link-bg);
   color: #fff;
   text-decoration: none;
-  transition:
-    border-color 0.18s ease;
+  transition: border-color 0.18s ease;
 }
 
 @property --border-spin {
@@ -176,7 +175,9 @@
 }
 
 @keyframes border-spin {
-  to { --border-spin: 360deg; }
+  to {
+    --border-spin: 360deg;
+  }
 }
 
 /* covers the interior of the card so only the 1px gradient border shows.

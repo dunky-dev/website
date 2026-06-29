@@ -1,0 +1,248 @@
+main {
+  /* typography */
+  --color-fg-default: rgb(255 255 255 / 0.85);
+  --color-fg-muted: rgb(255 255 255 / 0.45);
+  --color-fg-subtle: rgb(255 255 255 / 0.25);
+
+  /* backgrounds */
+  --color-canvas-default: transparent;
+  --color-canvas-overlay: #111114;
+  --color-canvas-inset: rgb(255 255 255 / 0.02);
+  --color-canvas-subtle: rgb(255 255 255 / 0.03);
+
+  /* borders */
+  --color-border-default: rgb(255 255 255 / 0.08);
+  --color-border-muted: rgb(255 255 255 / 0.05);
+  --color-neutral-muted: rgb(255 255 255 / 0.05);
+
+  /* buttons */
+  --color-btn-text: rgb(255 255 255 / 0.65);
+  --color-btn-bg: rgb(255 255 255 / 0.04);
+  --color-btn-border: rgb(255 255 255 / 0.07);
+  --color-btn-shadow: 0 0 transparent;
+  --color-btn-inset-shadow: 0 0 transparent;
+  --color-btn-hover-bg: rgb(255 255 255 / 0.08);
+  --color-btn-hover-border: rgb(255 255 255 / 0.1);
+  --color-btn-active-bg: rgb(255 255 255 / 0.06);
+  --color-btn-active-border: rgb(255 255 255 / 0.09);
+  --color-btn-selected-bg: rgb(255 255 255 / 0.03);
+
+  /* primary button = "Sign in with GitHub" */
+  --color-btn-primary-text: rgb(255 255 255 / 0.9);
+  --color-btn-primary-bg: rgb(255 255 255 / 0.08);
+  --color-btn-primary-border: rgb(255 255 255 / 0.1);
+  --color-btn-primary-shadow: 0 0 transparent;
+  --color-btn-primary-inset-shadow: 0 0 transparent;
+  --color-btn-primary-hover-bg: rgb(255 255 255 / 0.13);
+  --color-btn-primary-hover-border: rgb(255 255 255 / 0.13);
+  --color-btn-primary-selected-bg: rgb(255 255 255 / 0.07);
+  --color-btn-primary-selected-shadow: 0 0 transparent;
+  --color-btn-primary-disabled-text: rgb(255 255 255 / 0.25);
+  --color-btn-primary-disabled-bg: rgb(255 255 255 / 0.04);
+  --color-btn-primary-disabled-border: rgb(255 255 255 / 0.04);
+
+  /* accent (links, highlights) */
+  --color-accent-fg: rgb(255 255 255 / 0.85);
+  --color-accent-emphasis: rgb(255 255 255 / 0.12);
+  --color-accent-muted: rgb(255 255 255 / 0.07);
+  --color-accent-subtle: rgb(255 255 255 / 0.03);
+
+  /* segmented control (oldest/newest) */
+  --color-segmented-control-bg: rgb(255 255 255 / 0.03);
+  --color-segmented-control-button-bg: rgb(255 255 255 / 0.06);
+  --color-segmented-control-button-selected-border: rgb(255 255 255 / 0.08);
+
+  --color-action-list-item-default-hover-bg: rgb(255 255 255 / 0.05);
+
+  --color-success-fg: rgb(255 255 255 / 0.55);
+  --color-attention-fg: rgb(255 255 255 / 0.55);
+  --color-danger-fg: rgb(255 255 255 / 0.45);
+  --color-danger-muted: rgb(255 255 255 / 0.05);
+  --color-danger-subtle: rgb(255 255 255 / 0.02);
+
+  --color-primer-shadow-inset: 0 0 transparent;
+  --color-social-reaction-bg-hover: rgb(255 255 255 / 0.06);
+  --color-social-reaction-bg-reacted-hover: rgb(255 255 255 / 0.1);
+
+  /* syntax highlighting — monochrome */
+  --color-prettylights-syntax-comment: rgb(255 255 255 / 0.35);
+  --color-prettylights-syntax-constant: rgb(255 255 255 / 0.7);
+  --color-prettylights-syntax-entity: rgb(255 255 255 / 0.75);
+  --color-prettylights-syntax-keyword: rgb(255 255 255 / 0.6);
+  --color-prettylights-syntax-string: rgb(255 255 255 / 0.65);
+  --color-prettylights-syntax-variable: rgb(255 255 255 / 0.55);
+  --color-prettylights-syntax-entity-tag: rgb(255 255 255 / 0.65);
+  --color-prettylights-syntax-storage-modifier-import: rgb(255 255 255 / 0.7);
+  --color-prettylights-syntax-markup-heading: rgb(255 255 255 / 0.85);
+  --color-prettylights-syntax-markup-italic: rgb(255 255 255 / 0.65);
+  --color-prettylights-syntax-markup-bold: rgb(255 255 255 / 0.85);
+  --color-prettylights-syntax-brackethighlighter-unmatched: rgb(255 255 255 / 0.4);
+  --color-prettylights-syntax-brackethighlighter-angle: rgb(255 255 255 / 0.3);
+}
+
+/* ── layout ────────────────────────────────────────────────────────────── */
+
+.gsc-main {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.gsc-homepage-bg {
+  background: transparent !important;
+}
+
+/* ── reactions — compact inline strip ─────────────────────────────────── */
+
+.gsc-reactions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+}
+
+.gsc-reactions-count {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.25) !important;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.gsc-reactions-count a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* the flex row that wraps the react buttons */
+.gsc-reactions > div {
+  margin: 0 !important;
+  justify-content: flex-start !important;
+}
+
+/* emoji picker button */
+.gsc-reactions-button {
+  padding: 0.2rem 0.45rem !important;
+  border-radius: 0.4rem !important;
+  font-size: 0.8rem !important;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+
+.gsc-reactions-button:hover {
+  opacity: 1;
+}
+
+/* reaction pill (when reactions exist) */
+.gsc-direct-reaction-button {
+  padding: 0.15rem 0.5rem !important;
+  border-radius: 2rem !important;
+  font-size: 0.8rem !important;
+  gap: 0.3rem !important;
+  border: 1px solid rgb(255 255 255 / 0.07) !important;
+  background: rgb(255 255 255 / 0.03) !important;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.gsc-direct-reaction-button:hover {
+  background: rgb(255 255 255 / 0.07) !important;
+  border-color: rgb(255 255 255 / 0.12) !important;
+}
+
+.gsc-direct-reaction-button.has-reacted {
+  background: rgb(255 255 255 / 0.08) !important;
+  border-color: rgb(255 255 255 / 0.15) !important;
+}
+
+/* ── header (comment count + sort) ────────────────────────────────────── */
+
+.gsc-header {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  margin-bottom: 1rem;
+}
+
+.gsc-comments-count,
+.gsc-replies-count,
+.gsc-comments-count-separator {
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: rgb(255 255 255 / 0.25) !important;
+}
+
+.gsc-comments-count a,
+.gsc-replies-count a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* ── comment box ───────────────────────────────────────────────────────── */
+
+.gsc-comment-box {
+  border: 1px solid rgb(255 255 255 / 0.07) !important;
+  border-radius: 0.75rem !important;
+  background: rgb(255 255 255 / 0.02) !important;
+  overflow: hidden;
+}
+
+.gsc-comment-box-tabs {
+  background: rgb(255 255 255 / 0.02) !important;
+  border-bottom: 1px solid rgb(255 255 255 / 0.07) !important;
+  padding: 0 0.75rem !important;
+}
+
+.gsc-comment-box-textarea {
+  background: transparent !important;
+  color: rgb(255 255 255 / 0.85) !important;
+  border: none !important;
+  resize: vertical;
+}
+
+.gsc-comment-box-bottom {
+  background: rgb(255 255 255 / 0.02) !important;
+  border-top: 1px solid rgb(255 255 255 / 0.06) !important;
+  padding: 0.6rem 0.75rem !important;
+}
+
+/* ── individual comments ───────────────────────────────────────────────── */
+
+.gsc-comment {
+  border: 1px solid rgb(255 255 255 / 0.06) !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.gsc-comment-header {
+  background: rgb(255 255 255 / 0.02) !important;
+  border-bottom: 1px solid rgb(255 255 255 / 0.06) !important;
+  padding: 0.6rem 0.75rem !important;
+}
+
+.gsc-comment-content {
+  padding: 0.75rem !important;
+}
+
+.gsc-comment-footer {
+  border-top: 1px solid rgb(255 255 255 / 0.05) !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+/* ── sort buttons (oldest/newest) ──────────────────────────────────────── */
+
+.BtnGroup {
+  border-radius: 0.5rem !important;
+  overflow: hidden;
+}
+
+.BtnGroup-item .btn {
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  padding: 0.25rem 0.6rem !important;
+}

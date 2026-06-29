@@ -5,4 +5,9 @@ export default defineConfig({
   site: 'https://www.dunky.dev',
   trailingSlash: 'never',
   integrations: [mdx()],
+  server: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  },
 })

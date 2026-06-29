@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/base.astro";
 import { getCollection } from "astro:content";
+import "./blog.css";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),

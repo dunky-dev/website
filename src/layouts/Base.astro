@@ -1,12 +1,13 @@
 ---
 import Icon from '../components/icon.astro'
+import './layout.css'
 
 interface Props {
   title: string
   description?: string
 }
 
-const { title, description = 'Dunky — DX tools that unlock powerful UIs.' } = Astro.props
+const { title, description = 'Dunky: DX tools that unlock powerful UIs.' } = Astro.props
 const pathname = Astro.url.pathname
 const isHome = pathname === '/'
 ---
@@ -20,7 +21,6 @@ const isHome = pathname === '/'
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/logo/logo-symbol.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/logo/logo-symbol-white.svg" media="(prefers-color-scheme: dark)" />
-    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <header class="topbar">

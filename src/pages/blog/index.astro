@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/base.astro";
 import { getCollection } from "astro:content";
+import "./blog.css";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -8,8 +9,8 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 ---
 
 <Base
-  title="Blog — Dunky"
-  description="Dunky blog — DX tools that unlock powerful UIs."
+  title="Blog | Dunky"
+  description="Dunky blog: DX tools that unlock powerful UIs."
 >
   <main class="blog-page">
     <h1 class="blog-title">Blog</h1>

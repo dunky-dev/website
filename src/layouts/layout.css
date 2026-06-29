@@ -61,23 +61,39 @@ body {
   color: #fff;
   /* premium dark background: subtle radial glow over near-black */
   background-color: #08090d;
-  background-image: radial-gradient(120% 120% at 50% 0%, #222 0%, #111 55%, #000 100%);
+  background-image: radial-gradient(120% 120% at 50% 5%, #222 0%, #111 55%, #000 100%);
   background-attachment: fixed;
 }
 
 .topbar {
   position: fixed;
   top: 0;
-  right: 0;
   width: 100%;
-  display: flex;
-  gap: 0.25rem;
-  padding: 0.75rem 1rem;
   z-index: 10;
-  justify-content: center;
   background: rgb(8 9 13 / 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+.topbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem clamp(1.5rem, 5vw, 3rem);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.topbar-nav--centered {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .topbar-link {
@@ -106,8 +122,15 @@ body {
   color: #fff;
 }
 
-.topbar-link--back {
-  margin-right: auto;
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.topbar-logo-img {
+  height: 2rem;
+  width: auto;
 }
 
 .topbar-icon {

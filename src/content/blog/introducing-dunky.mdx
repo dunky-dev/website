@@ -1,0 +1,111 @@
+---
+title: Introducing 🫏 Dunky
+description: Built from the ground up for the design systems. One source of truth, that travels across any UI without rewiring.
+date: 2026-06-26
+banner: /blog/introducing-dunky-banner.jpg
+---
+
+If you've worked on a design system, you know the goal: consistency. A component that looks and behaves the same way no matter where it shows up. Most developers who've spent time in this space have rebuilt the same component many times to get it there, and noticed that the hard part was not just the logic. AI has made that part faster. But figuring out how to scale behavior and visual language through different frameworks and platforms is still one of the hardest things. And at the center of that problem is the wiring.
+
+## The Wiring Problem
+
+Behavior is descriptive by nature. You can explain a tooltip, a combobox, a focus trap in plain language without issues.
+
+The problem starts at implementation. That clean description gets broken apart and scattered across the codebase. Spread across lifecycles that fire in ways you have to learn by reading the source. Very often, attached to specific elements in the exact ways that the framework expects. All tied up with reactivity models, timing quirks, side effects, and gotchas that have nothing to do with the behavior itself. What's left is framework code that happens to produce the right output, and a mental model in implementation details that have nothing to do with the behavior itself.
+
+```
+     🧠👗                🛠️⚡️
++------------+   +----------------+          🧩
+|   behavior |   |   framework    |   +-------------+
+| + styles   | + | + side effects | = |  component  |
++------------+   +----------------+   +-------------+
+      |                   |
+ focus here      noise, can't reuse
+```
+
+In practice, the focus area is never as clean as the diagram. Behavior and styles don't live in their own box, they're spread across the same files as the framework code, sharing state with side effects that were never meant to be part of the core logic. The separation exists conceptually, in pratice is much harder.
+
+The problem isn't that these solutions are bad. Radix UI nails accessibility, focus management, keyboard navigation, ARIA, all done right. But it's DOM + React. The community stepped in and built ports, and those ports will drift.
+
+But the deeper issue isn't the drift. It's what's happening underneath, the same behavior rewired into a new substrate with a new set of assumptions. Other ecosystems don't wait for ports, they build their own. Focused engineering, narrow scope, done well. But still the same work, done again from scratch.
+
+## ..........
+
+I was talking with a designer on my team who had been sitting with the same frustration. The design world had been shifting fast, from design tools to vibe-coded prototypes and back again, and somewhere in that back-and-forth was the same unanswered question: why can't we just describe a UI and have it work everywhere? His hunch and mine were the same thing said from different chairs.
+
+He showed me [JSON render](https://json-render.dev/), a way to describe a component's structure as data and render. Just the description, traveling to wherever it needed to go.
+
+That clicked for me, but I wanted to take it further. Not just structure, behavior and styles too. The whole design system, described once, portable everywhere. That's what was missing.
+
+## ...
+
+When modern AI became good enough to write real code, the wiring problem got harder, not easier. You could ask AI to build a dropdown, and it would. But the output was always messy framework-specific patterns, assumptions baked in that made the code fragile. AI had learned from the same mess that internet had to offer.
+
+But give AI something pure like a state machine, or a style schema from a clear descriptive text and it performs completely differently. It reasons about the logic, not the wiring. The output is portable because the input was portable.
+
+That's the other reason a description layer matters. Not just for humans, but for AI generating code that actually holds up.
+
+AI is strong at pure logic. It falls apart when the framework kicks in. Ask it to build a tooltip without constraints and it will pick one, make assumptions, and bake them in. The output works, but it's already tied. Let's say a tooltip:
+
+<div class="code-compare">
+  <div>
+    <div class="code-label">Framework based</div>
+
+```jsx
+function Tooltip({ content, children }) {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    // wiring...
+  }, [open])
+
+  return ( ... )
+}
+```
+
+```css
+/* tooltip.css */
+.tooltip {
+  background: var(--color-overlay);
+  padding: var(--spacing-sm);
+  position: absolute;
+  z-index: 999;
+}
+```
+
+  </div>
+  <div>
+    <div class="code-label">Fully descriptive</div>
+
+```js
+// behavior
+{
+  states: {
+    hidden: {
+      on: { HOVER: 'visible' }
+    },
+    visible: {
+      on: { LEAVE: 'hidden' }
+    }
+  }
+}
+
+// styles — tokens
+{
+  content: {
+    background: '{color.overlay}',
+    padding: '{space.sm}'
+  }
+}
+```
+
+  </div>
+</div>
+
+No framework related code, just what the tooltip does and how it looks like, and. The renderer handles the rest.
+
+When the description layer is clean enough, something unexpected happens with AI contribution. Give an AI a spec written against a state machine and a style schema, and it can generate tests that map directly to transitions. Not unit tests guessing at implementation, but behavioral contracts: "in state visible, event BLUR must produce state idle." Those tests become the guardrails. The AI implements against them, and the machine topology makes it structurally impossible to fake a passing test by patching symptoms. You can't greenlight a broken combobox by scattering booleans — the spec won't let you arrive at an illegal state in the first place.
+
+The full loop looks like this: a precise description produces a machine, the machine produces failing tests, the tests drive an implementation that has no choice but to be correct. That's not a workflow, it's a ratchet. Each layer constrains the next, and AI operates best inside constraints — reasoning about logic, not guessing at wiring. The vision isn't AI that generates components. It's AI that generates verified components, where the description is the source of truth and every platform gets the same behavior, compiled down to whatever substrate it needs. Write it once, prove it once, render it anywhere.
+
+The inverse is also true, and it compounds fast. Every freestyle component AI generates becomes a liability the next time it touches it. There is no model to reason about, only output to reverse-engineer. When a bug appears, the AI reads the code like archaeology — inferring intent from implementation, patching the symptom it can see, introducing a new assumption that will conflict with the next patch. The codebase becomes a record of every misunderstanding stacked on top of the last one. Multiply that across a design system with fifty components, each maintaining three framework ports, and the AI isn't accelerating development anymore. It's doing damage control on its own prior work, with no ground truth to return to.

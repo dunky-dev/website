@@ -5,6 +5,20 @@ date: 2026-06-26
 banner: /blog/introducing-dunky-banner.jpg
 ---
 
+## TL;DR
+
+Dunky is a design system stack result from years of shipping design systems. Tools that make building DS and UIs that are amazing, work everywhere, and is AI friendly.
+
+#### Principles
+
+- Awesome DX
+- Fast by design
+- Reusability and portability by default
+- AI as a first-class citizen
+- Open source, shaped by the community
+
+## Overview
+
 If you've worked on a design system, you know the goal: consistency. A component that looks and behaves the same way no matter where it shows up. Most developers who've spent time in this space have rebuilt the same component many times to get it there, and noticed that the hard part was not just the logic. AI has made that part faster. But figuring out how to scale behavior and visual language through different frameworks and platforms is still one of the hardest things. And at the center of that problem is the wiring.
 
 ## The Wiring Problem
@@ -29,15 +43,15 @@ The problem isn't that these solutions are bad. Radix UI nails accessibility, fo
 
 But the deeper issue isn't the drift. It's what's happening underneath, the same behavior rewired into a new substrate with a new set of assumptions. Other ecosystems don't wait for ports, they build their own. Focused engineering, narrow scope, done well. But still the same work, done again from scratch.
 
-## ..........
+## Pure Description
 
-I was talking with a designer on my team who had been sitting with the same frustration. The design world had been shifting fast, from design tools to vibe-coded prototypes and back again, and somewhere in that back-and-forth was the same unanswered question: why can't we just describe a UI and have it work everywhere? His hunch and mine were the same thing said from different chairs.
+I was talking with a designer on my team who had the same question from a different angle. Why can't we describe a UI once and have it work everywhere?
 
-He showed me [JSON render](https://json-render.dev/), a way to describe a component's structure as data and render. Just the description, traveling to wherever it needed to go.
+He showed me [JSON render](https://json-render.dev/), describing a component's structure as pure data that travels anywhere. Nice, but limited. It fell short on behavior and styles.
 
-That clicked for me, but I wanted to take it further. Not just structure, behavior and styles too. The whole design system, described once, portable everywhere. That's what was missing.
+That clicked for me, but I wanted to take it further. Not just structure but behavior and styles too. The whole design system, described once, portable everywhere. That's what was missing, so I'm building it.
 
-## ...
+## Getting AI in the Game
 
 When modern AI became good enough to write real code, the wiring problem got harder, not easier. You could ask AI to build a dropdown, and it would. But the output was always messy framework-specific patterns, assumptions baked in that made the code fragile. AI had learned from the same mess that internet had to offer.
 
@@ -104,8 +118,22 @@ function Tooltip({ content, children }) {
 
 No framework related code, just what the tooltip does and how it looks like, and. The renderer handles the rest.
 
-When the description layer is clean enough, something unexpected happens with AI contribution. Give an AI a spec written against a state machine and a style schema, and it can generate tests that map directly to transitions. Not unit tests guessing at implementation, but behavioral contracts: "in state visible, event BLUR must produce state idle." Those tests become the guardrails. The AI implements against them, and the machine topology makes it structurally impossible to fake a passing test by patching symptoms. You can't greenlight a broken combobox by scattering booleans — the spec won't let you arrive at an illegal state in the first place.
+When the description layer is clean enough, something unexpected happens with AI contribution. Give an AI a spec written against a state machine and a style schema, and it can generate tests that map directly to transitions. Not unit tests guessing at implementation, but behavioral contracts: "in state visible, event BLUR must produce state idle." Those tests become the guardrails. The AI implements against them, and the machine topology makes it structurally impossible to fake a passing test by patching symptoms. You can't greenlight a broken combobox by scattering booleans: the spec won't let you arrive at an illegal state in the first place.
 
-The full loop looks like this: a precise description produces a machine, the machine produces failing tests, the tests drive an implementation that has no choice but to be correct. That's not a workflow, it's a ratchet. Each layer constrains the next, and AI operates best inside constraints — reasoning about logic, not guessing at wiring. The vision isn't AI that generates components. It's AI that generates verified components, where the description is the source of truth and every platform gets the same behavior, compiled down to whatever substrate it needs. Write it once, prove it once, render it anywhere.
+The full loop looks like this. A description produces a state-machine and a style-schema, the machine produces failing tests, the tests drive an implementation that has no choice but to be correct. That's not a workflow, it's a wedge. Each layer constrains the next, and AI operates best inside constraints, reasoning about logic, not guessing at wiring. The vision isn't AI that generates components. It's AI that compiles intent into strict components, where the description is the source of truth and every platform gets the same data. Write it once, render it anywhere.
 
-The inverse is also true, and it compounds fast. Every freestyle component AI generates becomes a liability the next time it touches it. There is no model to reason about, only output to reverse-engineer. When a bug appears, the AI reads the code like archaeology — inferring intent from implementation, patching the symptom it can see, introducing a new assumption that will conflict with the next patch. The codebase becomes a record of every misunderstanding stacked on top of the last one. Multiply that across a design system with fifty components, each maintaining three framework ports, and the AI isn't accelerating development anymore. It's doing damage control on its own prior work, with no ground truth to return to.
+The inverse is also true, and it compounds fast. Every freestyle component AI generates becomes a liability the next time it touches it. There is no model to reason about, only output to reverse-engineer. When a bug appears, the AI reads the code like archaeology: inferring intent from implementation, patching the symptom it can see, introducing a new assumption that will conflict with the next patch. The codebase becomes a record of every misunderstanding stacked on top of the last one. Multiply that across a design system and then the AI isn't accelerating development anymore. It's doing damage control on its own prior work, with no ground truth to return to.
+
+## Why Dunky?
+
+A donkey carries heavy loads quietly. Not for showing off, but built for reliability. More resilient, steady on any terrain. It lasts longer, requires less, gets the job done without needing attention.
+
+That's what design systems are meant to be. Low-profile infrastructure that everything depends on. The piece that matters most when it's missing. Dunky is built to be that reliable that enables everything else.
+
+## Join the Journey
+
+Dunky is being built in public. Follow along, contribute, experiment with early releases, or help shape the direction. Whether you're solving the wiring problem yourself or curious about design systems, there's a place for you here. We're building this as a community.
+
+**Stay in the loop** — [GitHub](https://github.com/dunky-dev) · [Twitter](https://x.com/ivanbanov)
+
+Cheers!

@@ -102,7 +102,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .logo:hover .logo-conic,
-  .logo:focus-visible .logo-conic {
+  .logo:focus-visible .logo-conic,
+  .link:hover::before,
+  .link:focus-visible::before {
     animation: none;
   }
 }
@@ -123,6 +125,8 @@
 }
 
 .link {
+  --link-bg: #0c0d11;
+  --link-bg-hover: #141519;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -132,26 +136,30 @@
   padding: 1.5rem 1rem;
   border-radius: 1rem;
   border: 1px solid rgb(255 255 255 / 0.1);
-  background: rgb(255 255 255 / 0.02);
+  background: var(--link-bg);
   color: #fff;
   text-decoration: none;
   transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    background 0.18s ease;
+    border-color 0.18s ease;
 }
 
-/* rainbow gradient ring, revealed on hover. a full-box gradient masked to
-   just the border band (border-box minus padding-box) so the corners stay
-   rounded. fades in via opacity. */
+@property --border-spin {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* rainbow gradient ring, revealed on hover. two layers: ::before is the full
+   conic gradient; ::after is an opaque card-background rect inset by 1px that
+   covers the interior, leaving only a 1px band of gradient visible at the edge.
+   this avoids the -webkit-mask-composite bug in Safari. */
 .link::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 1px;
   background: conic-gradient(
-    from 0deg,
+    from var(--border-spin),
     #ff0040,
     #ff8a00,
     #ffe600,
@@ -161,29 +169,51 @@
     #ff00d4,
     #ff0040
   );
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
   opacity: 0;
   transition: opacity 0.18s ease;
   pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes border-spin {
+  to { --border-spin: 360deg; }
+}
+
+/* covers the interior of the card so only the 1px gradient border shows.
+   inherits the card's solid background color to paint over the conic
+   gradient behind it, exposing only the 1px edge as the rainbow ring. */
+.link::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(1rem - 1px);
+  background: var(--link-bg);
+  transition: background 0.18s ease;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .link:hover,
 .link:focus-visible {
   border-color: transparent;
-  background: rgb(255 255 255 / 0.06);
   outline: none;
 }
 
 .link:hover::before,
 .link:focus-visible::before {
   opacity: 1;
+  animation: border-spin 2s linear infinite;
+}
+
+.link:hover::after,
+.link:focus-visible::after {
+  background: var(--link-bg-hover);
+}
+
+/* card content must sit above the ::before/::after layers */
+.link > * {
+  position: relative;
+  z-index: 2;
 }
 
 .icon {

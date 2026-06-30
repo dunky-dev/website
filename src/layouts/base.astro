@@ -32,11 +32,11 @@ const isBlogPost = pathname.startsWith('/blog/') && pathname !== '/blog/'
           </a>
         )}
         <nav class={`topbar-nav${isHome ? ' topbar-nav--centered' : ''}`}>
-          <a class="topbar-link" href="https://github.com/dunky-dev" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+          <a class="topbar-link topbar-link--social" href="https://github.com/dunky-dev" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
             <Icon name="github" class="topbar-icon" />
             <span>GitHub</span>
           </a>
-          <a class="topbar-link" href="https://x.com/ivanbanov" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
+          <a class="topbar-link topbar-link--social" href="https://x.com/ivanbanov" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
             <Icon name="twitter" class="topbar-icon" />
             <span>Twitter</span>
           </a>

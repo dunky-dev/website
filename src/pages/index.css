@@ -280,8 +280,9 @@
     background: none;
   }
 
-  /* no boxes on mobile, so no rainbow ring */
-  .link::before {
+  /* no boxes on mobile, so no rainbow ring or background fill */
+  .link::before,
+  .link::after {
     display: none;
   }
 

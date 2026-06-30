@@ -89,7 +89,7 @@
 
 .post-banner {
   width: 100%;
-  max-height: 250px;
+  max-height: 400px;
   overflow: hidden;
   border-radius: 0.75rem;
   margin-bottom: clamp(2rem, 5vw, 4rem);
@@ -222,6 +222,19 @@
 @media (width <= 600px) {
   .code-compare {
     flex-direction: column;
+  }
+
+  .post-banner {
+    height: 250px;
+    max-height: none;
+    border-radius: 0;
+    /* break out of .post horizontal padding so the banner is edge-to-edge */
+    width: 100vw;
+    margin-inline: calc(clamp(1.5rem, 5vw, 3rem) * -1);
+  }
+
+  .post {
+    padding-top: 56px;
   }
 }
 

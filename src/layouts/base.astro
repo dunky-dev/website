@@ -10,7 +10,6 @@ interface Props {
 const { title, description = 'Dunky: DX tools that unlock powerful UIs.' } = Astro.props
 const pathname = Astro.url.pathname
 const isHome = pathname === '/'
-const isBlogPost = pathname.startsWith('/blog/') && pathname !== '/blog/'
 ---
 
 <!doctype html>
@@ -26,7 +25,7 @@ const isBlogPost = pathname.startsWith('/blog/') && pathname !== '/blog/'
   <body>
     <header class="topbar">
       <div class="topbar-inner">
-        {isBlogPost && (
+        {!isHome && (
           <a class="topbar-logo" href="/" aria-label="Dunky Home">
             <img src="/logo/logo-white.svg" alt="Dunky" class="topbar-logo-img" />
           </a>

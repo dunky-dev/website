@@ -1,5 +1,7 @@
 ---
 import Icon from '../components/icon.astro'
+import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from '@vercel/speed-insights/astro'
 import './layout.css'
 
 interface Props {
@@ -22,6 +24,8 @@ const isBlogPost = pathname.startsWith('/blog/') && pathname !== '/blog/'
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/logo/logo-symbol.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/logo/logo-symbol-white.svg" media="(prefers-color-scheme: dark)" />
+    <Analytics />
+    <SpeedInsights />
   </head>
   <body>
     <header class="topbar">

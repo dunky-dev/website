@@ -1,13 +1,13 @@
 ---
 title: 'Dunky: The Journey'
-description: Built from the ground up for the design systems. One source of truth, that travels across any UI without rewiring.
+description: Built from the ground up for design systems. One source of truth that travels across any UI without rewiring.
 date: 2026-06-26
 banner: /blog/introducing-dunky-banner.jpg
 ---
 
 ## TL;DR
 
-Dunky is a design system stack result from years of shipping design systems. Tools that make building DS and UIs that are amazing, work everywhere, and is AI friendly.
+Dunky is a design system stack, the result of years of shipping design systems. It brnigs tools for building design systems and UIs that are amazing, work everywhere, and are AI friendly.
 
 #### Principles
 
@@ -19,13 +19,13 @@ Dunky is a design system stack result from years of shipping design systems. Too
 
 ## Overview
 
-If you've worked on a design system, you know the goal: consistency. A component that looks and behaves the same way no matter where it shows up. Most developers who've spent time in this space have rebuilt the same component many times to get it there, and noticed that the hard part was not just the logic. AI has made that part faster. But figuring out how to scale behavior and visual language through different frameworks and platforms is still one of the hardest things. And at the center of that problem is the wiring.
+If you've worked on a design system, you know the goal: consistency. A component that looks and behaves the same way no matter where it shows up. Most developers who've spent time in this space have rebuilt the same component many times to get it there, and noticed that the hard part was not just the logic. AI has made that part faster. But figuring out how to scale behavior and visual language across different frameworks and platforms is still one of the hardest things. And at the center of that problem is the wiring.
 
 ## The Wiring Problem
 
 Behavior is descriptive by nature. You can explain a tooltip, a combobox, a focus trap in plain language without issues.
 
-The problem starts at implementation. That clean description gets broken apart and scattered across the codebase. Spread across lifecycles that fire in ways you have to learn by reading the source. Very often, attached to specific elements in the exact ways that the framework expects. All tied up with reactivity models, timing quirks, side effects, and gotchas that have nothing to do with the behavior itself. What's left is framework code that happens to produce the right output, and a mental model in implementation details that have nothing to do with the behavior itself.
+The problem starts at implementation. That clean description gets broken apart and scattered across the codebase. Spread across lifecycles that fire in ways you have to learn by reading the source. Very often, attached to specific elements in the exact ways that the framework expects. All tied up with reactivity models, timing quirks, side effects, and gotchas that have nothing to do with the behavior itself. What's left is framework code that happens to produce the right output, and a mental model you can only recover by reading those implementation details.
 
 ```
      🧠👗                🛠️⚡️
@@ -37,7 +37,7 @@ The problem starts at implementation. That clean description gets broken apart a
  focus here      noise, can't reuse
 ```
 
-In practice, the focus area is never as clean as the diagram. Behavior and styles don't live in their own box, they're spread across the same files as the framework code, sharing state with side effects that were never meant to be part of the core logic. The separation exists conceptually, in pratice is much harder.
+In practice, the focus area is never as clean as the diagram. Behavior and styles don't live in their own box, they're spread across the same files as the framework code, sharing state with side effects that were never meant to be part of the core logic. The separation exists conceptually; in practice it's much harder.
 
 The problem isn't that these solutions are bad. Radix UI nails accessibility, focus management, keyboard navigation, ARIA, all done right. But it's DOM + React. The community stepped in and built ports, and those ports will drift.
 
@@ -53,9 +53,9 @@ That clicked for me, but I wanted to take it further. Not just structure but beh
 
 ## Getting AI in the Game
 
-When modern AI became good enough to write real code, the wiring problem got harder, not easier. You could ask AI to build a dropdown, and it would. But the output was always messy framework-specific patterns, assumptions baked in that made the code fragile. AI had learned from the same mess that internet had to offer.
+When modern AI became good enough to write real code, the wiring problem got harder, not easier. You could ask AI to build a dropdown, and it would. But the output was always messy framework-specific patterns, assumptions baked in that made the code fragile. AI had learned from the same mess the internet had to offer.
 
-But give AI something pure like a state machine, or a style schema from a clear descriptive text and it performs completely differently. It reasons about the logic, not the wiring. The output is portable because the input was portable.
+But give AI something pure, like a state machine or a style schema derived from clear descriptive text, and it performs completely differently. It reasons about the logic, not the wiring. The output is portable because the input was portable.
 
 That's the other reason a description layer matters. Not just for humans, but for AI generating code that actually holds up.
 
@@ -116,7 +116,7 @@ function Tooltip({ content, children }) {
   </div>
 </div>
 
-No framework related code, just what the tooltip does and how it looks like, and. The renderer handles the rest.
+No framework-related code, just what the tooltip does and what it looks like. The renderer handles the rest.
 
 When the description layer is clean enough, something unexpected happens with AI contribution. Give an AI a spec written against a state machine and a style schema, and it can generate tests that map directly to transitions. Not unit tests guessing at implementation, but behavioral contracts: "in state visible, event BLUR must produce state idle." Those tests become the guardrails. The AI implements against them, and the machine topology makes it structurally impossible to fake a passing test by patching symptoms. You can't greenlight a broken combobox by scattering booleans: the spec won't let you arrive at an illegal state in the first place.
 
@@ -128,7 +128,7 @@ The inverse is also true, and it compounds fast. Every freestyle component AI ge
 
 A donkey carries heavy loads quietly. Not for showing off, but built for reliability. More resilient, steady on any terrain. It lasts longer, requires less, gets the job done without needing attention.
 
-That's what design systems are meant to be. Low-profile infrastructure that everything depends on. The piece that matters most when it's missing. Dunky is built to be that reliable that enables everything else.
+That's what design systems are meant to be. Low-profile infrastructure that everything depends on. The piece that matters most when it's missing. Dunky is built to be exactly that: the reliable layer that enables everything else.
 
 ## Join the Journey
 

@@ -122,6 +122,12 @@ body {
   color: #fff;
 }
 
+@media (width <= 600px) {
+  .topbar-link--social span {
+    display: none;
+  }
+}
+
 .topbar-logo {
   display: flex;
   align-items: center;

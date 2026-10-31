@@ -13,7 +13,7 @@ pnpm install
 pnpm dev      # serves src/ at http://localhost:8080
 ```
 
-The logo and favicon come from the `src/logo` submodule — clone with
+The logo and favicon come from the `public/logo` submodule — clone with
 `--recurse-submodules` (or run `git submodule update --init`).
 
 ## License
